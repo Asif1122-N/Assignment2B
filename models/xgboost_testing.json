@@ -1,0 +1,20 @@
+{
+    "model": "XGBoost",
+    "testing_purpose": "Test how well XGBoost predicts SCATS traffic flow using the trained model.",
+    "saved_model_file": "xgboost.joblib",
+    "evaluation_metrics": [
+        "MAE",
+        "RMSE",
+        "MAPE_percent",
+        "R2",
+        "TrainingSeconds"
+    ],
+    "parameters": {
+        "n_estimators": 300,
+        "max_depth": 6,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "objective": "reg:squarederror"
+    }
+}

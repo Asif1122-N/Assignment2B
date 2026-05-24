@@ -1,0 +1,26 @@
+
+Readable Model Testing File for Assignment 2B
+
+This file explains the testing and evaluation of the machine learning models used for traffic flow prediction.
+
+Models tested:
+1. XGBoost
+2. LSTM
+3. GRU
+
+The actual trained model files are saved as .joblib and .keras files.
+These files are not readable like normal text files because they store the trained model in machine-readable format.
+
+Testing approach:
+The models were trained using the SCATS traffic dataset and tested by comparing their predicted traffic flow against the actual traffic flow values.
+
+Evaluation metrics used:
+- MAE: shows average prediction error in the same units as traffic flow, giving equal weight to all errors.
+- RMSE: will have predication errors as well as larger errors more heavily, showing how well the model handles large errors.
+- MAPE: the prediction error to actual value ratio, expressed as a percentage, showing the average percentage error of predictions.
+- R2: demonstrates how well the model explains the variance in the data, with 1 being perfect and 0 meaning no better than predicting the mean.
+Purpose of testing:
+the reasoning behind testing models is to evaluate how well they can predict traffic flow and to compare their performance using the evaluation metrics.
+
+To run model training and testing again:
+python3 src/main.py train --models xgb lstm gru --epochs 10

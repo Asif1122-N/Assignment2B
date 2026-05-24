@@ -1,0 +1,21 @@
+
+GRU Model Testing
+
+Model type:
+The kind of model is a deep learning time-series model.
+
+Testing purpose:
+The GRU model was tested to check how well it can predict traffic flow using previous traffic patterns.
+
+Saved files:
+- gru_model.keras
+- gru_scalers.joblib
+
+Evaluation metrics:
+- MAE
+- RMSE
+- MAPE_percent
+- R2
+- TrainingSeconds
+
+The GRU model is similar to LSTM, but it has a simpler structure and trains somewhat faster. It is useful for traffic flow prediction because it can capture temporal dependencies in the data while being more efficient than LSTM.
