@@ -1,4 +1,3 @@
-
 Readable Model Testing File for Assignment 2B
 
 This file explains the testing and evaluation of the machine learning models used for traffic flow prediction.

@@ -29,8 +29,7 @@ def flow_to_speed_kmh(flow: float, assume_under_capacity: bool = True) -> float:
 
     speed = max(roots) if assume_under_capacity else min(roots)
     speed = min(speed, SPEED_LIMIT_KMH)
-    return max(speed, 5.0)  # avoid unrealistic zero speed causing divide-by-zero
-
+    return max(speed, 5.0) 
 
 def edge_travel_time_minutes(distance_km: float, predicted_flow_per_hour: float) -> float:
     """Estimate travel time for one road segment in minutes."""
