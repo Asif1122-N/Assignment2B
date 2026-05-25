@@ -1,1 +1,21 @@
-for model
+This folder stores the trained machine learning models for Assignment 2B.
+
+Models implemented:
+1. XGBoost
+2. LSTM
+3. GRU
+
+The .joblib files are saved machine learning model files.
+The .keras files are saved deep learning model files.
+These files cannot be opened like normal text files because they are stored in binary format.
+
+Model purpose:
+- XGBoost predicts traffic flow using structured features such as SCATS number, time, day and previous traffic values.
+- LSTM predicts traffic flow by learning traffic patterns over time.
+- GRU is similar to LSTM but simpler and faster.
+
+Current model comparison:
+XGBoost performed the best because it had the lowest MAE, RMSE and MAPE, and the highest R² score.
+
+The models can be retrained by running:
+python3 src/main.py train --models xgb lstm gru --epochs 10

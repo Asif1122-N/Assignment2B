@@ -16,14 +16,13 @@ from data_processing import load_time_series, make_sequence_data, make_tabular_f
 
 
 def regression_metrics(y_true, y_pred):
-    """Calculate model accuracy scores for the report comparison table."""
+    """Generate regression metrics for model evaluation."""
     mae = mean_absolute_error(y_true, y_pred)
     mse = mean_squared_error(y_true, y_pred)
     rmse = mse ** 0.5
     r2 = r2_score(y_true, y_pred)
 
-    # MAPE shows the average percentage error.
-    # The non-zero check avoids division by zero errors.
+
     y_true_array = np.asarray(y_true, dtype=float)
     y_pred_array = np.asarray(y_pred, dtype=float)
     non_zero_mask = y_true_array != 0
@@ -93,9 +92,7 @@ def train_random_forest(df: pd.DataFrame) -> dict:
 def train_xgboost(df: pd.DataFrame) -> dict:
     """Train the XGBoost model.
 
-    XGBoost is used as the third ML model so we can compare it with LSTM and GRU.
-    The import is placed inside this function so the other models can still run
-    even if XGBoost is not installed correctly.
+    XGBoost is among the strongest models for tabular data. It often outperforms Random Forests by better handling feature interactions and providing more regularization options to prevent overfitting. With proper tuning, XGBoost can achieve superior accuracy on complex datasets like traffic prediction.
     """
     from xgboost import XGBRegressor
 
@@ -175,7 +172,7 @@ def train_deep_model(
     epochs: int = 30,
     batch_size: int = 64,
 ) -> dict:
-    """Train either the LSTM or GRU model."""
+    """Train both GRU and LSTM models."""
     seq = make_sequence_data(df, lookback=LOOKBACK_STEPS, test_size=TEST_SIZE)
     model, callback = build_deep_model(model_type, input_shape=seq.X_train.shape[1:])
 
@@ -229,7 +226,7 @@ def train_deep_model(
 
 
 def main(models: list[str], epochs: int):
-    """Train the selected models and save the comparison results."""
+    """This would train the selected models."""
     MODEL_DIR.mkdir(exist_ok=True)
     OUTPUT_DIR.mkdir(exist_ok=True)
 

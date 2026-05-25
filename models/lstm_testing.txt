@@ -1,0 +1,21 @@
+
+LSTM Model Testing
+
+Model type:
+The kind of model is a deep learning time-series model.
+
+Testing purpose:
+The LSTM model was tested to check how well it can learn traffic patterns over time and predict future traffic flow.
+
+Saved files:
+- lstm_model.keras
+- lstm_scalers.joblib
+
+Evaluation metrics:
+- MAE
+- RMSE
+- MAPE_percent
+- R2
+- TrainingSeconds
+
+The LSTM model is used for traffic flow prediction because it can capture long-term dependencies in sequential data, making it suitable for time-series forecasting tasks like traffic flow prediction.
