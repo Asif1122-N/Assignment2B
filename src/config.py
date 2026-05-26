@@ -9,9 +9,8 @@ OUTPUT_DIR = PROJECT_ROOT / "outputs"
 CLEANED_DATA = DATA_DIR / "cleaned_scats_data.csv"
 TIME_SERIES_DATA = DATA_DIR / "scats_time_series.csv"
 
-# Model defaults
-LOOKBACK_STEPS = 8          
-TEST_SIZE = 0.2             
+LOOKBACK_STEPS = 8
+TEST_SIZE = 0.2
 RANDOM_STATE = 42
 
 SPEED_LIMIT_KMH = 60.0
