@@ -4,10 +4,8 @@ import pandas as pd
 from tensorflow.keras.models import load_model
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, mean_absolute_percentage_error
 
-# =========================
-# 1. Load model and scaler
-# =========================
 
+# 1. Load model and scalers
 model = load_model("models/lstm_model.keras")
 scalers = joblib.load("models/lstm_scalers.joblib")
 
@@ -19,19 +17,13 @@ lookback = scalers["lookback"]
 print("Expected feature columns:", feature_cols)
 print("Lookback:", lookback)
 
-# =========================
 # 2. Load dataset
-# =========================
-
 df = pd.read_csv("data/cleaned_scats_data.csv")
 
 print("\nOriginal columns:")
 print(df.columns.tolist())
 
-# =========================
 # 3. Rename traffic column if needed
-# =========================
-
 possible_traffic_cols = [
     "Traffic",
     "traffic",
@@ -56,10 +48,7 @@ if traffic_col is None:
 
 df = df.rename(columns={traffic_col: "Traffic"})
 
-
-# 4. Create time features
-
-
+# 4. Generate time features
 possible_time_cols = [
     "DateTime",
     "Datetime",
@@ -91,7 +80,7 @@ else:
     if "DayOfWeek" not in df.columns:
         df["DayOfWeek"] = 0
 
-# Cyclical time encoding
+# Time functions to capture cyclical patterns in time and day of week
 df["TimeSin"] = np.sin(2 * np.pi * df["Hour"] / 24)
 df["TimeCos"] = np.cos(2 * np.pi * df["Hour"] / 24)
 
@@ -100,10 +89,7 @@ df["DayCos"] = np.cos(2 * np.pi * df["DayOfWeek"] / 7)
 
 df["IsWeekend"] = df["DayOfWeek"].isin([5, 6]).astype(int)
 
-# =========================
 # 5. Check required features
-# =========================
-
 missing_cols = [col for col in feature_cols if col not in df.columns]
 
 if missing_cols:
@@ -111,10 +97,7 @@ if missing_cols:
 
 df = df.dropna(subset=feature_cols)
 
-# =========================
 # 6. Prepare LSTM input
-# =========================
-
 data = df[feature_cols].values
 
 data_scaled = feature_scaler.transform(data)
@@ -134,19 +117,14 @@ y = np.array(y).reshape(-1, 1)
 print("\nX shape:", X.shape)
 print("y shape:", y.shape)
 
-# =========================
 # 7. Predict
-# =========================
 
 y_pred_scaled = model.predict(X)
 
 y_pred = target_scaler.inverse_transform(y_pred_scaled)
 y_actual = target_scaler.inverse_transform(y)
 
-# =========================
-# 8. Evaluate
-# =========================
-
+# 8. Calculate evaluation metrics
 mae = mean_absolute_error(y_actual, y_pred)
 rmse = np.sqrt(mean_squared_error(y_actual, y_pred))
 r2 = r2_score(y_actual, y_pred)
