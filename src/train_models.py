@@ -68,10 +68,7 @@ def regression_metrics(y_true, y_pred) -> dict:
         "R2": r2,
     }
 
-
-# ---------------------------------------------------------
 # 2. XGBoost model
-# ---------------------------------------------------------
 
 def train_xgboost(df: pd.DataFrame) -> dict:
     """Train XGBoost using normal table-based traffic features."""
