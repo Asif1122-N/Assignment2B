@@ -66,7 +66,7 @@ def build_graph(cleaned_csv_path=CLEANED_DATA, neighbours=3):
 
 
 def get_average_flow(flow_data, scats_number, selected_time):
-    """Get average traffic flow for the selected SCATS site and time."""
+    """Get average traffic flow for the selected SCATS site and time period."""
 
     site_data = flow_data[flow_data["SCATS Number"] == int(scats_number)]
 
@@ -134,7 +134,7 @@ def find_routes(graph, origin, destination, k=5):
 
 
 def route_between(origin, destination, datetime_text, k=5):
-    """Main function used by main.py to find routes."""
+    """Main function used by main.py to find the routes to the destination."""
 
     selected_time = pd.to_datetime(datetime_text).to_pydatetime()
 
