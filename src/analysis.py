@@ -41,7 +41,7 @@ def plot_actual_vs_predicted(model_file_name: str, title: str, rows: int = 500):
 if __name__ == "__main__":
     plot_model_comparison()
     for file_name, title in [
-        ("random_forest_predictions.csv", "Random Forest actual vs predicted"),
+        ("xgboost_predictions.csv", "XGBoost actual vs predicted"),
         ("lstm_predictions.csv", "LSTM actual vs predicted"),
         ("gru_predictions.csv", "GRU actual vs predicted"),
     ]:
