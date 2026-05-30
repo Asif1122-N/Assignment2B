@@ -71,7 +71,7 @@ class TBRGSApp:
 
     def find_routes(self):
         if self.origin_entry.get().strip() == self.destination_entry.get().strip():
-            messagebox.showerror("Input Error", "Origin and destination must be different.")
+            messagebox.showerror("Input Error", "The origin and destination must be different values.")
             return
 
         self.search_btn.configure(state="disabled", text="Searching...")
@@ -94,7 +94,7 @@ class TBRGSApp:
         except ValueError:
             self.root.after(0, lambda: messagebox.showerror(
                 "Input Error",
-                "Please type valid integers for origin, destination, and number of routes."
+                "Please input a valid integers for origin, destination, and number of routes."
             ))
             self.root.after(0, self.reset_button)
 
