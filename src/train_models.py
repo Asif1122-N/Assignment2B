@@ -36,7 +36,7 @@ from data_processing import (
 # 1. Model evaluation
 
 def regression_metrics(y_true, y_pred) -> dict:
-    """Calculate the accuracy scores used to compare the models."""
+    """Calculate the mean of the regression metrics."""
 
     mae = mean_absolute_error(y_true, y_pred)
     mse = mean_squared_error(y_true, y_pred)
@@ -46,7 +46,7 @@ def regression_metrics(y_true, y_pred) -> dict:
     y_true_array = np.asarray(y_true, dtype=float)
     y_pred_array = np.asarray(y_pred, dtype=float)
 
-    # MAPE is not divisible by 0, so we need to filter out zero values from y_true
+    # MAPE cannott be calculated when y_true is 0, so we need to filter out zero values from y_true
     non_zero_mask = y_true_array != 0
     if non_zero_mask.any():
         mape = (
@@ -71,7 +71,7 @@ def regression_metrics(y_true, y_pred) -> dict:
 # 2. XGBoost model
 
 def train_xgboost(df: pd.DataFrame) -> dict:
-    """Train XGBoost using normal table-based traffic features."""
+    """Train XGBoost using the input DataFrame."""
 
     from xgboost import XGBRegressor
 
@@ -226,7 +226,7 @@ def train_deep_model(df: pd.DataFrame, model_type: str, epochs: int) -> dict:
     return metrics
 
 
-# 4. Save model files
+# 4. Save  the model results
 
 
 def save_predictions(scats_numbers, datetimes, actual, predicted, filename: str):
@@ -261,7 +261,7 @@ def save_model_comparison(results: list[dict]):
     print(comparison_df)
 
 
-# 5. Main training function
+# 5. Below is the main function to run the training of selected models and save the results.
 
 
 def main(models: list[str], epochs: int):
@@ -307,3 +307,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     main(args.models, args.epochs)
+
