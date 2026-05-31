@@ -52,6 +52,7 @@ def load_time_series(path) -> pd.DataFrame:
     df["IsWeekend"] = df["DayOfWeek"].isin([5, 6]).astype(int)
 
     # THE important time features to capture cyclical patterns in time and day of week
+    slot = df["Hour"] * 4 + df["Minute"] // 15
     df["TimeSin"] = np.sin(2 * np.pi * slot / 96)
     df["TimeCos"] = np.cos(2 * np.pi * slot / 96)
     df["DaySin"] = np.sin(2 * np.pi * df["DayOfWeek"] / 7)
