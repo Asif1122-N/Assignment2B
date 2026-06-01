@@ -1,0 +1,59 @@
+Test run: 2026-06-01 18:03:16
+Result:   OK
+Ran:      23 tests
+Passed:   23
+Failed:   0
+Errors:   0
+----------------------------------------------------------------------
+
+test_01_dataset_loads_correctly (__main__.TC01_DataLoading.test_01_dataset_loads_correctly)
+TC01: Dataset loads, is non-empty, and contains all required columns. ... ok
+test_02a_nan_rows_are_dropped (__main__.TC02_MalformedData.test_02a_nan_rows_are_dropped)
+TC02a: Real dataset has no nulls; NaN rows are dropped during cleaning. ... ok
+test_02b_traffic_values_in_range (__main__.TC02_MalformedData.test_02b_traffic_values_in_range)
+TC02b: Traffic values are within a realistic range (0–1800 veh/15 min). ... ok
+test_03a_time_features_bounded (__main__.TC03_DataStructureIntegrity.test_03a_time_features_bounded)
+TC03a: Sin/Cos time features are in [-1, 1]. ... ok
+test_03b_lag_features_present (__main__.TC03_DataStructureIntegrity.test_03b_lag_features_present)
+TC03b: All lag and rolling mean features are present in the tabular dataset. ... ok
+test_04_sequence_shapes_correct (__main__.TC04_SequenceDataShapes.test_04_sequence_shapes_correct)
+TC04: X_train is 3D with correct lookback; X/y sample counts match. ... ok
+test_05_no_data_leakage (__main__.TC05_TemporalSplit.test_05_no_data_leakage)
+TC05: For every site, all train datetimes precede all test datetimes. ... ok
+test_06_coordinates_valid (__main__.TC06_SiteLocations.test_06_coordinates_valid)
+TC06: No site has null coordinates and all are within Boroondara bounds. ... ok
+test_07_haversine_correct (__main__.TC07_Haversine.test_07_haversine_correct)
+TC07: Haversine returns 0 for identical points and is symmetric. ... ok
+test_08_speed_capped_and_decreases (__main__.TC08_FlowToSpeed.test_08_speed_capped_and_decreases)
+TC08: Speed never exceeds the limit and higher flow yields lower speed. ... ok
+test_09_travel_time_correct (__main__.TC09_EdgeTravelTime.test_09_travel_time_correct)
+TC09: Travel time includes the 30s delay and matches a hand-computed value. ... ok
+test_10a_nodes_and_edges_valid (__main__.TC10_GraphConstruction.test_10a_nodes_and_edges_valid)
+TC10: All SCATS sites are nodes and every edge has a valid distance_km. ... ok
+test_10b_graph_is_connected (__main__.TC10_GraphConstruction.test_10b_graph_is_connected)
+TC10e: Graph is connected — required for route finding to work. ... ok
+test_11a_valid_pair_returns_sorted_routes (__main__.TC11_RouteFinding.test_11a_valid_pair_returns_sorted_routes)
+TC11a: A valid O→D pair returns 1–5 routes sorted by travel time. ... ok
+test_11b_routes_end_at_destination (__main__.TC11_RouteFinding.test_11b_routes_end_at_destination)
+TC11b: Every route ends at the destination site. ... ok
+test_11c_invalid_origin_handled (__main__.TC11_RouteFinding.test_11c_invalid_origin_handled)
+TC11c: An invalid SCATS site number returns empty list or raises cleanly. ... ok
+test_11d_same_origin_destination_handled (__main__.TC11_RouteFinding.test_11d_same_origin_destination_handled)
+TC11d: O == D does not crash the system. ... ok
+test_11e_no_duplicate_nodes_in_route (__main__.TC11_RouteFinding.test_11e_no_duplicate_nodes_in_route)
+TC11j: Route does not revisit the same node. ... ok
+test_12a_peak_offpeak_differ (__main__.TC12_PredictionPlausibility.test_12a_peak_offpeak_differ)
+TC12a: Predicted flow at 8am differs from predicted flow at 2am. ... ok
+test_12b_prediction_in_range (__main__.TC12_PredictionPlausibility.test_12b_prediction_in_range)
+TC12b: Predicted flow is >= 0 and within a realistic range (0–3600 veh/hr). ... ok
+test_12c_prediction_is_repeatable (__main__.TC12_PredictionPlausibility.test_12c_prediction_is_repeatable)
+TC12d: Same input produces same prediction (model inference is deterministic). ... ok
+test_13a_metrics_keys_and_zero_actuals (__main__.TC13_RegressionMetrics.test_13a_metrics_keys_and_zero_actuals)
+TC13: Metrics handle zero actuals without crashing and return all keys. ... ok
+test_13b_imperfect_predictions_have_error (__main__.TC13_RegressionMetrics.test_13b_imperfect_predictions_have_error)
+TC13d: Imperfect predictions produce positive MAE and RMSE. ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.912s
+
+OK

@@ -173,4 +173,6 @@ def get_site_locations(cleaned_csv_path) -> pd.DataFrame:
     locations["SCATS Number"] = locations["SCATS Number"].astype(int)
     locations["NB_LATITUDE"] = pd.to_numeric(locations["NB_LATITUDE"], errors="coerce")
     locations["NB_LONGITUDE"] = pd.to_numeric(locations["NB_LONGITUDE"], errors="coerce")
-    return locations.dropna(subset=["NB_LATITUDE", "NB_LONGITUDE"]).reset_index(drop=True)
+    df = locations.dropna(subset=["NB_LATITUDE", "NB_LONGITUDE"])
+    df = df[(df["NB_LATITUDE"] != 0.0) & (df["NB_LONGITUDE"] != 0.0)]
+    return df.reset_index(drop=True)
